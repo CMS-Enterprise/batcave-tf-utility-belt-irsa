@@ -48,3 +48,104 @@ module "velero_irsa" {
   }
 
 }
+
+module "argocd_irsa" {
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
+  role_name                     = "${var.cluster_name}-ub-argocd"
+  role_path                     = var.iam_path
+  role_permissions_boundary_arn = var.permissions_boundary
+  app_name                      = var.argocd_app_name
+  sops_arns                     = var.argocd_sopd_arns
+  attach_sops_policy            = true
+  oidc_providers = {
+    main = {
+      provider_arn               = var.oidc_provider_arn
+      namespace_service_accounts = var.argocd_service_accounts
+    }
+  }
+
+}
+
+module "fluentbit_irsa" {
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
+  role_name                     = "${var.cluster_name}-ub-fluentbit"
+  role_path                     = var.iam_path
+  role_permissions_boundary_arn = var.permissions_boundary
+  app_name                      = var.fluentbit_app_name
+  s3_bucket_arns                = var.fluentbit_bucket_arns
+  attach_s3_policy              = true
+  oidc_providers = {
+    main = {
+      provider_arn               = var.oidc_provider_arn
+      namespace_service_accounts = var.fluentbit_service_accounts
+    }
+  }
+
+}
+
+module "flux_irsa" {
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
+  role_name                     = "${var.cluster_name}-ub-flux"
+  role_path                     = var.iam_path
+  role_permissions_boundary_arn = var.permissions_boundary
+  app_name                      = var.flux_app_name
+  sops_arns                     = var.flux_sops_arns
+  attach_sops_policy            = true
+  oidc_providers = {
+    main = {
+      provider_arn               = var.oidc_provider_arn
+      namespace_service_accounts = var.flux_service_accounts
+    }
+  }
+
+}
+
+module "container-insights_irsa" {
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
+  role_name                     = "${var.cluster_name}-ub-fcontainer-insights"
+  role_path                     = var.iam_path
+  role_permissions_boundary_arn = var.permissions_boundary
+  app_name                      = var.container-insights_app_name
+  attach_insights_policy        = true
+  oidc_providers = {
+    main = {
+      provider_arn               = var.oidc_provider_arn
+      namespace_service_accounts = var.fcontainer-insights_service_accounts
+    }
+  }
+
+}
+
+module "gitlab_irsa" {
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
+  role_name                     = "${var.cluster_name}-ub-gitlab"
+  role_path                     = var.iam_path
+  role_permissions_boundary_arn = var.permissions_boundary
+  app_name                      = var.gitlab_app_name
+  s3_bucket_arns                = var.gitlab_bucket_arns
+  attach_s3_policy              = true
+  oidc_providers = {
+    main = {
+      provider_arn               = var.oidc_provider_arn
+      namespace_service_accounts = var.gitlab_service_accounts
+    }
+  }
+
+}
+
+module "gitlab-runner_irsa" {
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
+  role_name                     = "${var.cluster_name}-ub-gitlab-runner"
+  role_path                     = var.iam_path
+  role_permissions_boundary_arn = var.permissions_boundary
+  app_name                      = var.gitlab-runner_app_name
+  s3_bucket_arns                = var.gitlab-runner_bucket_arns
+  attach_s3_policy              = true
+  oidc_providers = {
+    main = {
+      provider_arn               = var.oidc_provider_arn
+      namespace_service_accounts = var.gitlab-runner_service_accounts
+    }
+  }
+
+}

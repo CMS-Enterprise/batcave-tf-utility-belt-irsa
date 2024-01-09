@@ -51,3 +51,87 @@ variable "velero_service_accounts" {
   type    = list(string)
   default = ["velero:velero-velero-server"]
 }
+
+variable "argocd_sops_arns" {
+  type        = list(string)
+  description = "sops for argocd"
+}
+variable "argocd_app_name" {
+  type    = string
+  default = "ArgoCD"
+}
+variable "argocd_service_accounts" {
+  type = list(string)
+  default = [
+    "argocd:argocd-application-controller",
+    "argocd:argocd-argocd-repo-server",
+    "argocd:argocd-server"    
+  ]
+}
+
+variable "fluentbit_bucket_arns" {
+  type        = list(string)
+  description = "buckets for fluentbit"
+}
+variable "fluentbit_app_name" {
+  type    = string
+  default = "Fluentbit"
+}
+variable "fluentbit_service_accounts" {
+  type = list(string)
+  default = ["fluentbit:fluentbit-fluent-bit"]
+}
+
+variable "flux_sops_arns" {
+  type        = list(string)
+  description = "sops for flux"
+}
+variable "flux_app_name" {
+  type    = string
+  default = "Flux"
+}
+variable "flux_service_accounts" {
+  type = list(string)
+  default = ["flux-system:kustomize-controller"]
+}
+
+
+variable "container-insights_app_name" {
+  type    = string
+  default = "container-insights"
+}
+variable "container-insights_service_accounts" {
+  type = list(string)
+  default = ["amazon-cloudwatch:aws-cloudwatch-metrics"]
+}
+
+variable "gitlab_bucket_arns" {
+  type        = list(string)
+  description = "buckets for gitlab"
+}
+variable "gitlab_app_name" {
+  type    = string
+  default = "GitLab"
+}
+variable "gitlab_service_accounts" {
+  type = list(string)
+  default = [
+    "gitlab:gitlab-minio",
+    "gitlab:gitlab-webservice",
+    "gitlab:gitlab-toolbox",
+    "gitlab:gitlab-sidekiq"
+  ]
+}
+
+variable "gitlab-runner_bucket_arns" {
+  type        = list(string)
+  description = "buckets for gitlab-runner"
+}
+variable "gitlab-runner_app_name" {
+  type    = string
+  default = "GitlabRunner"
+}
+variable "gitlab-runner_service_accounts" {
+  type = list(string)
+  default = ["gitlab-runner:gitlab-runner"]
+}
