@@ -55,7 +55,7 @@ module "argocd_irsa" {
   role_path                     = var.iam_path
   role_permissions_boundary_arn = var.permissions_boundary
   app_name                      = var.argocd_app_name
-  sops_arns                     = var.argocd_sopd_arns
+  sops_arn                     = var.argocd_sops_arn
   attach_sops_policy            = true
   oidc_providers = {
     main = {
@@ -89,7 +89,7 @@ module "flux_irsa" {
   role_path                     = var.iam_path
   role_permissions_boundary_arn = var.permissions_boundary
   app_name                      = var.flux_app_name
-  sops_arns                     = var.flux_sops_arns
+  sops_arn                     = var.flux_sops_arn
   attach_sops_policy            = true
   oidc_providers = {
     main = {
@@ -102,7 +102,7 @@ module "flux_irsa" {
 
 module "container-insights_irsa" {
   source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
-  role_name                     = "${var.cluster_name}-ub-fcontainer-insights"
+  role_name                     = "${var.cluster_name}-ub-container-insights"
   role_path                     = var.iam_path
   role_permissions_boundary_arn = var.permissions_boundary
   app_name                      = var.container-insights_app_name
@@ -110,7 +110,7 @@ module "container-insights_irsa" {
   oidc_providers = {
     main = {
       provider_arn               = var.oidc_provider_arn
-      namespace_service_accounts = var.fcontainer-insights_service_accounts
+      namespace_service_accounts = var.container-insights_service_accounts
     }
   }
 

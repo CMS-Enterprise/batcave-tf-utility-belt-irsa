@@ -52,8 +52,8 @@ variable "velero_service_accounts" {
   default = ["velero:velero-velero-server"]
 }
 
-variable "argocd_sops_arns" {
-  type        = list(string)
+variable "argocd_sops_arn" {
+  type        = string
   description = "sops for argocd"
 }
 variable "argocd_app_name" {
@@ -82,8 +82,8 @@ variable "fluentbit_service_accounts" {
   default = ["fluentbit:fluentbit-fluent-bit"]
 }
 
-variable "flux_sops_arns" {
-  type        = list(string)
+variable "flux_sops_arn" {
+  type        = string
   description = "sops for flux"
 }
 variable "flux_app_name" {
