@@ -54,7 +54,7 @@ variable "velero_service_accounts" {
 
 variable "argocd_sops_arn" {
   type        = string
-  description = "sops for argocd"
+  description = "sops kms key arns for argocd"
 }
 variable "argocd_app_name" {
   type    = string
@@ -84,7 +84,7 @@ variable "fluentbit_service_accounts" {
 
 variable "flux_sops_arn" {
   type        = string
-  description = "sops for flux"
+  description = "sops kms key arns for flux"
 }
 variable "flux_app_name" {
   type    = string
@@ -123,15 +123,15 @@ variable "gitlab_service_accounts" {
   ]
 }
 
-variable "gitlab-runner_bucket_arns" {
+variable "gitlab_runner_bucket_arns" {
   type        = list(string)
-  description = "buckets for gitlab-runner"
+  description = "buckets for gitlab_runner"
 }
-variable "gitlab-runner_app_name" {
+variable "gitlab_runner_app_name" {
   type    = string
   default = "GitlabRunner"
 }
-variable "gitlab-runner_service_accounts" {
+variable "gitlab_runner_service_accounts" {
   type = list(string)
-  default = ["gitlab-runner:gitlab-runner"]
+  default = ["gitlab_runner:gitlab_runner"]
 }

@@ -117,6 +117,7 @@ module "container-insights_irsa" {
 }
 
 module "gitlab_irsa" {
+  for_each = toset (length(var.gitlab_runner_bucket_arns) > 0 ? ["create"] : [])
   source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
   role_name                     = "${var.cluster_name}-ub-gitlab"
   role_path                     = var.iam_path
@@ -133,18 +134,19 @@ module "gitlab_irsa" {
 
 }
 
-module "gitlab-runner_irsa" {
+module "gitlab_runner_irsa" {
+  for_each = toset (length(var.gitlab_runner_bucket_arns) > 0 ? ["create"] : [])
   source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
-  role_name                     = "${var.cluster_name}-ub-gitlab-runner"
+  role_name                     = "${var.cluster_name}-ub-gitlab_runner"
   role_path                     = var.iam_path
   role_permissions_boundary_arn = var.permissions_boundary
-  app_name                      = var.gitlab-runner_app_name
-  s3_bucket_arns                = var.gitlab-runner_bucket_arns
+  app_name                      = var.gitlab_runner_app_name
+  s3_bucket_arns                = var.gitlab_runner_bucket_arns
   attach_s3_policy              = true
   oidc_providers = {
     main = {
       provider_arn               = var.oidc_provider_arn
-      namespace_service_accounts = var.gitlab-runner_service_accounts
+      namespace_service_accounts = var.gitlab_runner_service_accounts
     }
   }
 
