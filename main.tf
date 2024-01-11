@@ -137,7 +137,7 @@ module "gitlab_irsa" {
 module "gitlab_runner_irsa" {
   for_each = toset (length(var.gitlab_runner_bucket_arns) > 0 ? ["create"] : [])
   source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
-  role_name                     = "${var.cluster_name}-ub-gitlab_runner"
+  role_name                     = "${var.cluster_name}-ub-gitlab-runner"
   role_path                     = var.iam_path
   role_permissions_boundary_arn = var.permissions_boundary
   app_name                      = var.gitlab_runner_app_name

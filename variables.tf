@@ -133,5 +133,5 @@ variable "gitlab_runner_app_name" {
 }
 variable "gitlab_runner_service_accounts" {
   type = list(string)
-  default = ["gitlab_runner:gitlab_runner"]
+  default = ["gitlab-runner:gitlab-runner"]
 }
