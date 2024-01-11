@@ -55,7 +55,7 @@ module "argocd_irsa" {
   role_path                     = var.iam_path
   role_permissions_boundary_arn = var.permissions_boundary
   app_name                      = var.argocd_app_name
-  sops_arn                     = var.argocd_sops_arn
+  sops_arn                      = var.argocd_sops_arn
   attach_sops_policy            = true
   oidc_providers = {
     main = {
@@ -89,7 +89,7 @@ module "flux_irsa" {
   role_path                     = var.iam_path
   role_permissions_boundary_arn = var.permissions_boundary
   app_name                      = var.flux_app_name
-  sops_arn                     = var.flux_sops_arn
+  sops_arn                      = var.flux_sops_arn
   attach_sops_policy            = true
   oidc_providers = {
     main = {
@@ -117,7 +117,7 @@ module "container-insights_irsa" {
 }
 
 module "gitlab_irsa" {
-  for_each = toset (length(var.gitlab_runner_bucket_arns) > 0 ? ["create"] : [])
+  for_each                      = toset(length(var.gitlab_runner_bucket_arns) > 0 ? ["create"] : [])
   source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
   role_name                     = "${var.cluster_name}-ub-gitlab"
   role_path                     = var.iam_path
@@ -135,7 +135,7 @@ module "gitlab_irsa" {
 }
 
 module "gitlab_runner_irsa" {
-  for_each = toset (length(var.gitlab_runner_bucket_arns) > 0 ? ["create"] : [])
+  for_each                      = toset(length(var.gitlab_runner_bucket_arns) > 0 ? ["create"] : [])
   source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
   role_name                     = "${var.cluster_name}-ub-gitlab-runner"
   role_path                     = var.iam_path

@@ -65,7 +65,7 @@ variable "argocd_service_accounts" {
   default = [
     "argocd:argocd-application-controller",
     "argocd:argocd-argocd-repo-server",
-    "argocd:argocd-server"    
+    "argocd:argocd-server"
   ]
 }
 
@@ -78,7 +78,7 @@ variable "fluentbit_app_name" {
   default = "Fluentbit"
 }
 variable "fluentbit_service_accounts" {
-  type = list(string)
+  type    = list(string)
   default = ["fluentbit:fluentbit-fluent-bit"]
 }
 
@@ -91,7 +91,7 @@ variable "flux_app_name" {
   default = "Flux"
 }
 variable "flux_service_accounts" {
-  type = list(string)
+  type    = list(string)
   default = ["flux-system:kustomize-controller"]
 }
 
@@ -101,7 +101,7 @@ variable "container-insights_app_name" {
   default = "container-insights"
 }
 variable "container-insights_service_accounts" {
-  type = list(string)
+  type    = list(string)
   default = ["amazon-cloudwatch:aws-cloudwatch-metrics"]
 }
 
@@ -132,6 +132,6 @@ variable "gitlab_runner_app_name" {
   default = "GitlabRunner"
 }
 variable "gitlab_runner_service_accounts" {
-  type = list(string)
+  type    = list(string)
   default = ["gitlab-runner:gitlab-runner"]
 }
