@@ -54,7 +54,7 @@ variable "velero_service_accounts" {
 
 variable "argocd_sops_arn" {
   type        = string
-  description = "sops kms key arns for argocd"
+  description = "sops kms key arn for argocd"
 }
 variable "argocd_app_name" {
   type    = string
@@ -84,7 +84,7 @@ variable "fluentbit_service_accounts" {
 
 variable "flux_sops_arn" {
   type        = string
-  description = "sops kms key arns for flux"
+  description = "sops kms key arn for flux"
 }
 variable "flux_app_name" {
   type    = string
