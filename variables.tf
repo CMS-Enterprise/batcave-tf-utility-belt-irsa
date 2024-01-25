@@ -108,6 +108,7 @@ variable "container-insights_service_accounts" {
 variable "gitlab_bucket_arns" {
   type        = list(string)
   description = "buckets for gitlab"
+  default     = []
 }
 variable "gitlab_app_name" {
   type    = string
@@ -126,6 +127,7 @@ variable "gitlab_service_accounts" {
 variable "gitlab_runner_bucket_arns" {
   type        = list(string)
   description = "buckets for gitlab_runner"
+  default     = []
 }
 variable "gitlab_runner_app_name" {
   type    = string
