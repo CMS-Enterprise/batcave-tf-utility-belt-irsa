@@ -102,7 +102,8 @@ variable "container-insights_app_name" {
 }
 variable "container-insights_service_accounts" {
   type    = list(string)
-  default = ["amazon-cloudwatch:aws-cloudwatch-metrics"]
+  default = ["container-insights:aws-cloudwatch-metrics"]
+  description = "service accounts for container-insights in form of namespace:service-account"
 }
 
 variable "gitlab_bucket_arns" {
