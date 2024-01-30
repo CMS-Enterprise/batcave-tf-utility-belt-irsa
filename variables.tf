@@ -101,8 +101,8 @@ variable "container-insights_app_name" {
   default = "container-insights"
 }
 variable "container-insights_service_accounts" {
-  type    = list(string)
-  default = ["container-insights:aws-cloudwatch-metrics"]
+  type        = list(string)
+  default     = ["container-insights:aws-cloudwatch-metrics"]
   description = "service accounts for container-insights in form of namespace:service-account"
 }
 
