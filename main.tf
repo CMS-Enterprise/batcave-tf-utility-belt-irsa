@@ -151,3 +151,22 @@ module "gitlab_runner_irsa" {
   }
 
 }
+
+
+module "grafana_irsa" {
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
+  role_name                     = "${var.cluster_name}-ub-grafana"
+  role_path                     = var.iam_path
+  role_permissions_boundary_arn = var.permissions_boundary
+  app_name                      = var.grafana_app_name
+  attach_cloudwatch_policy      = true
+  attach_ec2_policy             = true
+  attach_tags_policy            = true
+  oidc_providers = {
+    main = {
+      provider_arn               = var.oidc_provider_arn
+      namespace_service_accounts = var.grafana_service_accounts
+    }
+  }
+
+}

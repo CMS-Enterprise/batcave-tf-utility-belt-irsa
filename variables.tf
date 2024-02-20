@@ -139,3 +139,18 @@ variable "gitlab_runner_service_accounts" {
   type    = list(string)
   default = ["gitlab-runner:gitlab-runner"]
 }
+
+variable "grafana_app_name" {
+  type    = string
+  default = "Grafana"
+}
+variable "grafana_service_accounts" {
+  type = list(string)
+  default = [
+    "monitoring:monitoring-grafana",
+    "monitoring:monitoring-monitoring-kube-alertmanager",
+    "monitoring:monitoring-monitoring-kube-operator",
+    "monitoring:monitoring-monitoring-kube-state-metrics",
+    "monitoring:monitoring-monitoring-prometheus-node-exporter"
+  ]
+}
