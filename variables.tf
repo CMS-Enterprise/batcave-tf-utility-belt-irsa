@@ -40,6 +40,7 @@ variable "thanos_service_accounts" {
   default = [
     "monitoring:thanos-storegateway",
     "monitoring:prometheus",
+    "thanos:thanos-storegateway",
   ]
 }
 
