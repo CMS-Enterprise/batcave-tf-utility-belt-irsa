@@ -1,5 +1,5 @@
 module "loki_irsa" {
-  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.1"
   role_name                     = "${var.cluster_name}-ub-loki"
   role_path                     = var.iam_path
   role_permissions_boundary_arn = var.permissions_boundary
@@ -16,7 +16,7 @@ module "loki_irsa" {
 }
 
 module "thanos_irsa" {
-  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.1"
   role_name                     = "${var.cluster_name}-ub-thanos"
   role_path                     = var.iam_path
   role_permissions_boundary_arn = var.permissions_boundary
@@ -50,7 +50,7 @@ module "velero_irsa" {
 }
 
 module "argocd_irsa" {
-  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.1"
   role_name                     = "${var.cluster_name}-ub-argocd"
   role_path                     = var.iam_path
   role_permissions_boundary_arn = var.permissions_boundary
@@ -67,7 +67,7 @@ module "argocd_irsa" {
 }
 
 module "fluentbit_irsa" {
-  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.1"
   role_name                     = "${var.cluster_name}-ub-fluentbit"
   role_path                     = var.iam_path
   role_permissions_boundary_arn = var.permissions_boundary
@@ -84,7 +84,7 @@ module "fluentbit_irsa" {
 }
 
 module "flux_irsa" {
-  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.1"
   role_name                     = "${var.cluster_name}-ub-flux"
   role_path                     = var.iam_path
   role_permissions_boundary_arn = var.permissions_boundary
@@ -101,7 +101,7 @@ module "flux_irsa" {
 }
 
 module "container-insights_irsa" {
-  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.1"
   role_name                     = "${var.cluster_name}-ub-container-insights"
   role_path                     = var.iam_path
   role_permissions_boundary_arn = var.permissions_boundary
@@ -118,7 +118,7 @@ module "container-insights_irsa" {
 
 module "gitlab_irsa" {
   for_each                      = toset(length(var.gitlab_bucket_arns) > 0 ? ["create"] : [])
-  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.1"
   role_name                     = "${var.cluster_name}-ub-gitlab"
   role_path                     = var.iam_path
   role_permissions_boundary_arn = var.permissions_boundary
@@ -136,7 +136,7 @@ module "gitlab_irsa" {
 
 module "gitlab_runner_irsa" {
   for_each                      = toset(length(var.gitlab_runner_bucket_arns) > 0 ? ["create"] : [])
-  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.0"
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.1"
   role_name                     = "${var.cluster_name}-ub-gitlab-runner"
   role_path                     = var.iam_path
   role_permissions_boundary_arn = var.permissions_boundary
@@ -147,6 +147,25 @@ module "gitlab_runner_irsa" {
     main = {
       provider_arn               = var.oidc_provider_arn
       namespace_service_accounts = var.gitlab_runner_service_accounts
+    }
+  }
+
+}
+
+
+module "grafana_irsa" {
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.1"
+  role_name                     = "${var.cluster_name}-ub-grafana"
+  role_path                     = var.iam_path
+  role_permissions_boundary_arn = var.permissions_boundary
+  app_name                      = var.grafana_app_name
+  attach_cloudwatch_policy      = true
+  attach_ec2_policy             = true
+  attach_tags_policy            = true
+  oidc_providers = {
+    main = {
+      provider_arn               = var.oidc_provider_arn
+      namespace_service_accounts = var.grafana_service_accounts
     }
   }
 
