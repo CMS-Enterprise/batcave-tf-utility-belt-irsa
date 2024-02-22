@@ -156,7 +156,7 @@ variable "grafana_service_accounts" {
 }
 
 variable "external_secrets_service_accounts" {
-  type    = list(string)
+  type = list(string)
   default = [
     "external-secrets:imagepull-es"
   ]

@@ -171,7 +171,7 @@ module "grafana_irsa" {
 
 }
 
-module "external_secrets_irsa" { 
+module "external_secrets_irsa" {
   source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.1"
   role_name                     = "${var.cluster_name}-ub-external-secrets"
   role_path                     = var.iam_path
