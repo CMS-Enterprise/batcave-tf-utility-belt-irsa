@@ -161,3 +161,23 @@ variable "external_secrets_service_accounts" {
     "external-secrets:imagepull-es"
   ]
 }
+
+variable "create_ub_cosign_iam_role" {
+  description = "Flag to create Cosign IAM role"
+  default     = false
+  type        = bool
+}
+
+variable "iam_role_path" {
+  default = "/delegatedadmin/developer/"
+  type    = string
+}
+
+variable "iam_role_permissions_boundary" {
+  default = "arn:aws:iam::373346310182:policy/cms-cloud-admin/developer-boundary-policy"
+  type    = string
+}
+
+output "cosign_iam_role_arn" {
+  value = try(aws_iam_role.cosign[0].arn, "")
+}

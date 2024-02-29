@@ -187,3 +187,39 @@ module "external_secrets_irsa" {
 
 
 }
+
+################################################################################
+# cosign role using different condition for than batcave-tf-irsa
+## Setup for cosign keyless signatures
+################################################################################
+
+# locals {
+#   oidc_provider = var.oidc_provider_arn
+# }
+
+resource "aws_iam_role" "cosign" {
+  count = var.create_ub_cosign_iam_role ? 1 : 0
+
+  name = "${var.cluster_name}-ub-cosign"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRoleWithWebIdentity"
+        Effect = "Allow"
+        Principal = {
+          # Federated = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${local.oidc_provider}"
+          Federated = "${var.oidc_provider_arn}"
+        }
+        Condition = {
+          StringEquals = {
+            "${var.oidc_provider_arn}:aud" : "sigstore",
+            "${var.oidc_provider_arn}:sub" : "system:serviceaccount:gitlab-runner:cosign"
+          }
+        }
+      },
+    ]
+  })
+  path                 = var.iam_role_path
+  permissions_boundary = var.iam_role_permissions_boundary
+}
