@@ -178,6 +178,3 @@ variable "iam_role_permissions_boundary" {
   type    = string
 }
 
-output "cosign_iam_role_arn" {
-  value = try(aws_iam_role.cosign[0].arn, "")
-}

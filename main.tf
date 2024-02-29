@@ -197,7 +197,7 @@ module "external_secrets_irsa" {
 #   oidc_provider = var.oidc_provider_arn
 # }
 
-resource "aws_iam_role" "cosign" {
+resource "aws_iam_role" "ub_cosign" {
   count = var.create_ub_cosign_iam_role ? 1 : 0
 
   name = "${var.cluster_name}-ub-cosign"
