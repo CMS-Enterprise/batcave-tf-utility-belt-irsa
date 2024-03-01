@@ -185,17 +185,12 @@ module "external_secrets_irsa" {
     }
   }
 
-
 }
 
 ################################################################################
-# cosign role using different condition for than batcave-tf-irsa
+# cosign role using different condition than batcave-tf-irsa
 ## Setup for cosign keyless signatures
 ################################################################################
-
-# locals {
-#   oidc_provider = var.oidc_provider_arn
-# }
 
 resource "aws_iam_role" "ub_cosign" {
   count = var.create_ub_cosign_iam_role ? 1 : 0
@@ -208,7 +203,6 @@ resource "aws_iam_role" "ub_cosign" {
         Action = "sts:AssumeRoleWithWebIdentity"
         Effect = "Allow"
         Principal = {
-          # Federated = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${local.oidc_provider}"
           Federated = "${var.oidc_provider_arn}"
         }
         Condition = {
