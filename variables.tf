@@ -154,10 +154,3 @@ variable "grafana_service_accounts" {
     "monitoring:monitoring-monitoring-prometheus-node-exporter"
   ]
 }
-
-variable "external_secrets_service_accounts" {
-  type = list(string)
-  default = [
-    "external-secrets:imagepull-es"
-  ]
-}
