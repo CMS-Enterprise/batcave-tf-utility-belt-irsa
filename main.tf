@@ -170,3 +170,33 @@ module "grafana_irsa" {
   }
 
 }
+################################################################################
+# cosign role using different condition than batcave-tf-irsa
+## Setup for cosign keyless signatures
+################################################################################
+
+resource "aws_iam_role" "ub_cosign" {
+  count = var.create_ub_cosign_iam_role ? 1 : 0
+
+  name = "${var.cluster_name}-ub-cosign"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRoleWithWebIdentity"
+        Effect = "Allow"
+        Principal = {
+          Federated = var.oidc_provider_arn
+        }
+        Condition = {
+          StringEquals = {
+            "${var.oidc_provider_arn}:aud" : "sigstore",
+            "${var.oidc_provider_arn}:sub" : "system:serviceaccount:gitlab-runner:cosign"
+          }
+        }
+      },
+    ]
+  })
+  path                 = var.iam_role_path
+  permissions_boundary = var.iam_role_permissions_boundary
+}
