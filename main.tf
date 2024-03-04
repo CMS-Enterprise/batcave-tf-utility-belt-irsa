@@ -203,7 +203,7 @@ resource "aws_iam_role" "ub_cosign" {
         Action = "sts:AssumeRoleWithWebIdentity"
         Effect = "Allow"
         Principal = {
-          Federated = "${var.oidc_provider_arn}"
+          Federated = var.oidc_provider_arn
         }
         Condition = {
           StringEquals = {

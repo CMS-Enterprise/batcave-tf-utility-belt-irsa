@@ -177,4 +177,3 @@ variable "iam_role_permissions_boundary" {
   default = "arn:aws:iam::373346310182:policy/cms-cloud-admin/developer-boundary-policy"
   type    = string
 }
-
