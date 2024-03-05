@@ -162,11 +162,11 @@ variable "create_ub_cosign_iam_role" {
 }
 
 variable "iam_role_path" {
-  default = "/delegatedadmin/developer/"
+  default = ""
   type    = string
 }
 
 variable "iam_role_permissions_boundary" {
-  default = "arn:aws:iam::373346310182:policy/cms-cloud-admin/developer-boundary-policy"
+  default = ""
   type    = string
 }
