@@ -154,3 +154,19 @@ variable "grafana_service_accounts" {
     "monitoring:monitoring-monitoring-prometheus-node-exporter"
   ]
 }
+
+variable "create_ub_cosign_iam_role" {
+  description = "Flag to create Cosign IAM role"
+  default     = false
+  type        = bool
+}
+
+variable "iam_role_path" {
+  default = ""
+  type    = string
+}
+
+variable "iam_role_permissions_boundary" {
+  default = ""
+  type    = string
+}
