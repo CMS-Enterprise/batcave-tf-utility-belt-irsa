@@ -197,6 +197,6 @@ resource "aws_iam_role" "ub_cosign" {
       },
     ]
   })
-  path                 = var.iam_role_path
-  permissions_boundary = var.iam_role_permissions_boundary
+  path                 = var.iam_path
+  permissions_boundary = var.permissions_boundary
 }
