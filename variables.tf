@@ -2,7 +2,7 @@
 variable "iam_path" {
   description = "Path of IAM role"
   type        = string
-  default     = ""  
+  default     = ""
 }
 
 variable "permissions_boundary" {
