@@ -170,6 +170,26 @@ module "grafana_irsa" {
   }
 
 }
+
+module "vault_irsa" {
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.1"
+  role_name                     = "${var.cluster_name}-ub-vault"
+  role_path                     = var.iam_path
+  role_permissions_boundary_arn = var.permissions_boundary
+  app_name                      = var.vault_app_name
+  attach_sops_policy            = true
+  attach_dynamodb_policy        = true
+  sops_arn                      = var.vault_sops_arn
+  dynamodb_arn                  = var.vault_dynamodb_arn
+  oidc_providers = {
+    main = {
+      provider_arn               = var.oidc_provider_arn
+      namespace_service_accounts = var.vault_service_accounts
+    }
+  }
+
+}
+
 ################################################################################
 # cosign role using different condition than batcave-tf-irsa
 ## Setup for cosign keyless signatures

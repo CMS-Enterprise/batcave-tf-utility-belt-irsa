@@ -160,3 +160,21 @@ variable "create_ub_cosign_iam_role" {
   default     = false
   type        = bool
 }
+
+variable "vault_sops_arn" {
+  type        = string
+  description = "sops kms key arn for vault"
+}
+
+variable "vault_dynamodb_arn" {
+  type        = string
+  description = "dynamodb database arn for vault"
+}
+variable "vault_app_name" {
+  type    = string
+  default = "vault"
+}
+variable "vault_service_accounts" {
+  type    = list(string)
+  default = ["vault:vault-sa"]
+}
