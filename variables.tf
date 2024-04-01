@@ -178,3 +178,16 @@ variable "vault_service_accounts" {
   type    = list(string)
   default = ["vault:vault-sa"]
 }
+
+variable "defectdojo_app_name" {
+  type    = string
+  default = "defectdojo"
+}
+variable "defectdojo_service_accounts" {
+  type    = list(string)
+  default = ["defectdojo:defectdojo"]
+}
+variable "defectdojo_bucket_arns" {
+  type        = list(string)
+  description = "buckets for defectdojo"
+}

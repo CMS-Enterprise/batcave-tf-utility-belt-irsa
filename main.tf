@@ -190,6 +190,23 @@ module "vault_irsa" {
 
 }
 
+module "defectdojo_irsa" {
+  source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.1"
+  role_name                     = "${var.cluster_name}-ub-defectdojo"
+  role_path                     = var.iam_path
+  role_permissions_boundary_arn = var.permissions_boundary
+  app_name                      = var.defectdojo_app_name
+  s3_bucket_arns                = var.defectdojo_bucket_arns
+  attach_s3_policy              = true
+  oidc_providers = {
+    main = {
+      provider_arn               = var.oidc_provider_arn
+      namespace_service_accounts = var.defectdojo_service_accounts
+    }
+  }
+
+}
+
 ################################################################################
 # cosign role using different condition than batcave-tf-irsa
 ## Setup for cosign keyless signatures
