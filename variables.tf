@@ -137,10 +137,7 @@ variable "gitlab_runner_app_name" {
 }
 variable "gitlab_runner_service_accounts" {
   type    = list(string)
-  default = [
-    "gitlab-runner:gitlab-runner",
-    "defectdojo:defectdojo"
-  ]
+  default = ["gitlab-runner:gitlab-runner"]
 }
 
 variable "grafana_app_name" {
