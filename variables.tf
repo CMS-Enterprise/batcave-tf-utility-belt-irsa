@@ -185,7 +185,7 @@ variable "defectdojo_app_name" {
 }
 variable "defectdojo_service_accounts" {
   type    = list(string)
-  default = ["defectdojo:defectdojo"]  
+  default = ["defectdojo:defectdojo"]
 }
 variable "defectdojo_bucket_arns" {
   type        = list(string)
