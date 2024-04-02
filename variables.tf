@@ -190,4 +190,5 @@ variable "defectdojo_service_accounts" {
 variable "defectdojo_bucket_arns" {
   type        = list(string)
   description = "buckets for defectdojo"
+  default     = []
 }
