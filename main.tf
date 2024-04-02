@@ -191,6 +191,7 @@ module "vault_irsa" {
 }
 
 module "defectdojo_irsa" {
+  for_each                      = toset(length(var.defectdojo_bucket_arns) > 0 ? ["create"] : [])
   source                        = "git::git@github.com:CMS-Enterprise/batcave-tf-irsa.git//.?ref=1.0.1"
   role_name                     = "${var.cluster_name}-ub-defectdojo"
   role_path                     = var.iam_path
